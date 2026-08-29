@@ -1,0 +1,186 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://getmudra.dev/schemas/metadata.schema.json",
+  "title": "Mudra Asset Metadata",
+  "description": "Metadata describing a cultural asset in the Mudra collection.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "name",
+    "slug",
+    "region",
+    "category",
+    "description",
+    "tags",
+    "creator",
+    "source",
+    "license"
+  ],
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Human-readable name of the cultural subject.",
+      "minLength": 1,
+      "maxLength": 100
+    },
+    "slug": {
+      "type": "string",
+      "description": "URL- and filesystem-safe identifier.",
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "region": {
+      "type": "array",
+      "description": "Indian regions associated with the subject.",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+      }
+    },
+    "category": {
+      "type": "string",
+      "enum": [
+        "architecture",
+        "art",
+        "clothing",
+        "craft",
+        "festival",
+        "food",
+        "instrument",
+        "music",
+        "object",
+        "pattern",
+        "performing-art",
+        "symbol",
+        "tradition",
+        "transport"
+      ]
+    },
+    "description": {
+      "type": "string",
+      "description": "Short factual description of the cultural subject.",
+      "minLength": 10,
+      "maxLength": 1000
+    },
+    "localNames": {
+      "type": "object",
+      "description": "Verified names of the subject in relevant local languages.",
+      "additionalProperties": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 200
+      }
+    },
+    "tags": {
+      "type": "array",
+      "description": "Searchable keywords.",
+      "minItems": 1,
+      "maxItems": 20,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+      }
+    },
+    "creator": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 100
+        },
+        "github": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9-]+$"
+        }
+      }
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type"
+      ],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "original",
+            "adapted"
+          ]
+        },
+        "url": {
+          "type": "string",
+          "format": "uri"
+        },
+        "creator": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "license": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 100
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "adapted"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "url",
+              "license"
+            ]
+          }
+        }
+      ]
+    },
+    "license": {
+      "type": "string",
+      "description": "License applied to the contributed artwork.",
+      "enum": [
+        "CC-BY-4.0"
+      ]
+    },
+    "sources": {
+      "type": "array",
+      "description": "References used to research the cultural subject.",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "title",
+          "url"
+        ],
+        "properties": {
+          "title": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 200
+          },
+          "url": {
+            "type": "string",
+            "format": "uri"
+          }
+        }
+      }
+    },
+    "notes": {
+      "type": "string",
+      "maxLength": 1000
+    }
+  }
+}
