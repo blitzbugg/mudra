@@ -1,0 +1,77 @@
+name: 🎨 Add a Cultural Asset
+description: Suggest or claim a new cultural asset for Mudra.
+title: "[Asset]: "
+labels:
+  - "good first issue"
+  - "asset"
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## 🎨 Add a Cultural Asset
+
+        Thank you for contributing to Mudra!
+
+        If this is your first open-source contribution, don't worry.
+        Follow the fields below and we'll help you through the process.
+
+  - type: input
+    id: asset-name
+    attributes:
+      label: Asset name
+      description: What cultural asset would you like to contribute?
+      placeholder: Chenda
+    validations:
+      required: true
+
+  - type: input
+    id: region
+    attributes:
+      label: Region
+      description: Which Indian region is this associated with?
+      placeholder: Kerala
+    validations:
+      required: true
+
+  - type: input
+    id: category
+    attributes:
+      label: Category
+      description: Choose an existing category when possible.
+      placeholder: instrument
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Cultural context
+      description: Briefly explain what this asset represents.
+      placeholder: |
+        Explain the cultural significance or context of this subject.
+    validations:
+      required: true
+
+  - type: textarea
+    id: references
+    attributes:
+      label: References
+      description: Provide reliable sources about the subject.
+      placeholder: |
+        https://example.com/reference
+        https://example.org/reference
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: contribution
+    attributes:
+      label: Contribution
+      options:
+        - label: I have checked that this asset is not already present.
+          required: true
+        - label: I intend to create the SVG myself or use artwork that I am legally allowed to contribute.
+          required: true
+        - label: I have read the Asset Guidelines.
+          required: true

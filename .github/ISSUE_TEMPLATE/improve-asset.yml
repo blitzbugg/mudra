@@ -1,0 +1,40 @@
+name: 🧹 Improve an Asset
+description: Suggest an improvement to an existing Mudra asset.
+title: "[Improve]: "
+labels:
+  - "help wanted"
+
+body:
+  - type: textarea
+    id: asset
+    attributes:
+      label: Asset
+      description: Which asset needs improvement?
+      placeholder: |
+        assets/india/kerala/music/chenda/chenda.svg
+    validations:
+      required: true
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: What could be improved?
+      placeholder: |
+        Explain the issue with the current asset.
+    validations:
+      required: true
+
+  - type: textarea
+    id: suggestion
+    attributes:
+      label: Suggested improvement
+      placeholder: |
+        Explain what you think should be changed.
+    validations:
+      required: true
+
+  - type: textarea
+    id: references
+    attributes:
+      label: References
+      description: Add references supporting the proposed change.
