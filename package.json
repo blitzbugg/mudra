@@ -1,0 +1,21 @@
+{
+  "name": "mudra",
+  "version": "0.1.0",
+  "description": "Open-source Indian and regional cultural assets for developers.",
+  "private": true,
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/YOUR_USERNAME/mudra.git"
+  },
+  "homepage": "https://getmudra.dev",
+  "bugs": {
+    "url": "https://github.com/YOUR_USERNAME/mudra/issues"
+  },
+  "scripts": {
+    "validate": "echo \"Asset validation will be added in the next phase.\""
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}
