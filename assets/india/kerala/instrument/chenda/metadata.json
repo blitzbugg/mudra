@@ -1,0 +1,37 @@
+{
+  "name": "Chenda",
+  "slug": "chenda",
+  "region": ["kerala"],
+  "category": "music",
+  "description": "A traditional cylindrical percussion instrument from Kerala, widely used in temple festivals, ceremonies, and classical performances like Kathakali and Theyyam.",
+  "localNames": {
+    "ml": "ചെണ്ട"
+  },
+  "tags": [
+    "drum",
+    "percussion",
+    "kerala",
+    "festival",
+    "temple",
+    "traditional-instrument",
+    "chenda-melam"
+  ],
+  "creator": {
+    "name": "Mudra Community"
+  },
+  "source": {
+    "type": "original"
+  },
+  "license": "CC-BY-4.0",
+  "sources": [
+    {
+      "title": "Kerala Tourism - Traditional Arts and Culture",
+      "url": "https://keralatourism.org"
+    },
+    {
+      "title": "Sangeet Natak Akademi - Percussion Instruments of India",
+      "url": "https://sangeetnatak.gov.in"
+    }
+  ],
+  "notes": "The chenda is one of the most prominent percussion instruments in Kerala. It is central to chenda melam, a traditional ensemble performed at temples and festivals. The instrument consists of a cylindrical wooden shell with cowhide membranes stretched over both ends, held together by braided cords."
+}
