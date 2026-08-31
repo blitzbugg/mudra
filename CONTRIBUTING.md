@@ -120,11 +120,12 @@ Example:
 
 ```text
 assets/
-└── kerala/
-    └── music/
-        └── chenda/
-            ├── chenda.svg
-            └── metadata.json
+└── india/
+    └── kerala/
+        └── music/
+            └── chenda/
+                ├── chenda.svg
+                └── metadata.json
 ```
 
 ---
@@ -193,22 +194,24 @@ Every cultural asset should follow this structure:
 
 ```text
 assets/
-└── <region>/
-    └── <category>/
-        └── <asset-name>/
-            ├── <asset-name>.svg
-            └── metadata.json
+└── <country>/
+    └── <region>/
+        └── <category>/
+            └── <asset-name>/
+                ├── <asset-name>.svg
+                └── metadata.json
 ```
 
 Example:
 
 ```text
 assets/
-└── kerala/
-    └── music/
-        └── chenda/
-            ├── chenda.svg
-            └── metadata.json
+└── india/
+    └── kerala/
+        └── music/
+            └── chenda/
+                ├── chenda.svg
+                └── metadata.json
 ```
 
 ---
