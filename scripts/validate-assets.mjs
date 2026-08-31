@@ -15,7 +15,7 @@
  *   node scripts/validate-assets.mjs assets/india/kerala/music/chenda/chenda.svg
  */
 
-import { readdirSync } from "node:fs";
+import { existsSync, readdirSync } from "node:fs";
 import { join, resolve, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 import { execFileSync } from "node:child_process";
@@ -66,8 +66,10 @@ if (args.length > 0) {
   }
 } else {
   // Find all assets automatically
-  svgFiles.push(...findFiles(assetsDir, (f) => f.endsWith(".svg")));
-  metaFiles.push(...findFiles(assetsDir, (f) => f.endsWith("metadata.json")));
+  if (existsSync(assetsDir)) {
+    svgFiles.push(...findFiles(assetsDir, (f) => f.endsWith(".svg")));
+    metaFiles.push(...findFiles(assetsDir, (f) => f.endsWith("metadata.json")));
+  }
 }
 
 // ─── Nothing to validate ───────────────────────────────────────────────────
