@@ -6,16 +6,23 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/YOUR_USERNAME/mudra.git"
+    "url": "git+https://github.com/blitzbugg/mudra.git"
   },
   "homepage": "https://getmudra.dev",
   "bugs": {
-    "url": "https://github.com/YOUR_USERNAME/mudra/issues"
+    "url": "https://github.com/blitzbugg/mudra/issues"
   },
   "scripts": {
-    "validate": "echo \"Asset validation will be added in the next phase.\""
+    "test": "node scripts/validate-assets.mjs",
+    "validate": "node scripts/validate-assets.mjs",
+    "validate:svg": "node scripts/validate-svg.mjs",
+    "validate:metadata": "node scripts/validate-metadata.mjs"
   },
   "engines": {
     "node": ">=22"
+  },
+  "devDependencies": {
+    "ajv": "^8.20.0",
+    "ajv-formats": "^3.0.1"
   }
 }
