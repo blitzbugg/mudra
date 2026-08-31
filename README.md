@@ -32,7 +32,7 @@ Mudra is built for first-time contributors. Here's how:
 ### 1. Fork and clone
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/mudra.git
+git clone https://github.com/blitzbugg/mudra.git
 cd mudra
 ```
 
