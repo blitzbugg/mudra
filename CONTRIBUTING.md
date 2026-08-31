@@ -66,7 +66,7 @@ This creates your own copy of Mudra.
 Clone your fork to your computer:
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/mudra.git
+git clone https://github.com/blitzbugg/mudra.git
 cd mudra
 ```
 
