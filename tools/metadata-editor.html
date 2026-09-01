@@ -1,0 +1,2728 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Mudra · Metadata Editor</title>
+
+  <style>
+    :root {
+      --bg: #fafafa;
+      --surface: #ffffff;
+      --surface-subtle: #f6f7f8;
+
+      --text: #1f2328;
+      --muted: #656d76;
+      --border: #d0d7de;
+
+      --accent: #24292f;
+      --accent-hover: #323941;
+
+      --green: #1a7f37;
+      --green-bg: #dafbe1;
+
+      --red: #cf222e;
+      --red-bg: #ffebe9;
+
+      --purple: #8250df;
+      --orange: #bc4c00;
+
+      --radius: 8px;
+      --shadow:
+        0 1px 2px rgba(27, 31, 36, 0.04),
+        0 3px 8px rgba(27, 31, 36, 0.04);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+
+      font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Helvetica,
+        Arial,
+        sans-serif;
+
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    button,
+    input,
+    textarea,
+    select {
+      font: inherit;
+    }
+
+    /* --------------------------------
+       Header
+    -------------------------------- */
+
+    .topbar {
+      height: 64px;
+
+      display: flex;
+      align-items: center;
+
+      border-bottom: 1px solid var(--border);
+      background: var(--surface);
+    }
+
+    .topbar-inner {
+      width: min(1120px, calc(100% - 32px));
+      margin: auto;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 17px;
+      letter-spacing: -0.02em;
+    }
+
+    .brand-mark {
+      width: 30px;
+      height: 30px;
+
+      display: grid;
+      place-items: center;
+
+      border-radius: 7px;
+
+      background: var(--text);
+      color: white;
+
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .brand span {
+      color: var(--muted);
+      font-weight: 500;
+    }
+
+    .github-link {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 13px;
+    }
+
+    .github-link:hover {
+      color: var(--text);
+    }
+
+    /* --------------------------------
+       Layout
+    -------------------------------- */
+
+    .page {
+      width: min(1120px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 44px 0 80px;
+    }
+
+    .intro {
+      max-width: 760px;
+      margin-bottom: 34px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+
+      margin-bottom: 12px;
+
+      color: var(--green);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+
+    .eyebrow-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--green);
+    }
+
+    h1 {
+      margin: 0 0 10px;
+
+      font-size: clamp(30px, 4vw, 42px);
+      line-height: 1.15;
+      letter-spacing: -0.04em;
+    }
+
+    .intro p {
+      margin: 0;
+
+      color: var(--muted);
+      font-size: 16px;
+      max-width: 680px;
+    }
+
+    .intro code {
+      padding: 2px 5px;
+      border-radius: 5px;
+
+      background: #eef0f2;
+
+      color: var(--text);
+      font-size: 13px;
+    }
+
+    /* --------------------------------
+       Progress
+    -------------------------------- */
+
+    .progress {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+
+      margin-bottom: 24px;
+
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+
+      background: var(--surface);
+    }
+
+    .progress-item {
+      padding: 13px 15px;
+
+      border-right: 1px solid var(--border);
+
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .progress-item:last-child {
+      border-right: 0;
+    }
+
+    .progress-number {
+      display: inline-grid;
+      place-items: center;
+
+      width: 21px;
+      height: 21px;
+
+      margin-right: 6px;
+
+      border-radius: 50%;
+
+      background: var(--surface-subtle);
+      border: 1px solid var(--border);
+
+      font-size: 11px;
+    }
+
+    .progress-item.active {
+      color: var(--text);
+    }
+
+    .progress-item.active .progress-number {
+      background: var(--text);
+      color: white;
+      border-color: var(--text);
+    }
+
+    /* --------------------------------
+       Cards
+    -------------------------------- */
+
+    .card {
+      margin-bottom: 18px;
+
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+
+      background: var(--surface);
+      box-shadow: var(--shadow);
+    }
+
+    .card-header {
+      padding: 18px 20px;
+
+      border-bottom: 1px solid var(--border);
+
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+    }
+
+    .card-number {
+      flex: 0 0 auto;
+
+      width: 27px;
+      height: 27px;
+
+      display: grid;
+      place-items: center;
+
+      border: 1px solid var(--border);
+      border-radius: 6px;
+
+      background: var(--surface-subtle);
+
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .card-header h2 {
+      margin: 0;
+
+      font-size: 15px;
+      line-height: 1.3;
+    }
+
+    .card-header p {
+      margin: 3px 0 0;
+
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .card-body {
+      padding: 20px;
+    }
+
+    /* --------------------------------
+       Forms
+    -------------------------------- */
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .field {
+      margin-bottom: 18px;
+    }
+
+    .field:last-child {
+      margin-bottom: 0;
+    }
+
+    label {
+      display: block;
+
+      margin-bottom: 6px;
+
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .required {
+      color: var(--red);
+    }
+
+    input,
+    textarea,
+    select {
+      width: 100%;
+
+      padding: 9px 11px;
+
+      border: 1px solid var(--border);
+      border-radius: 6px;
+
+      background: var(--surface);
+      color: var(--text);
+
+      outline: none;
+
+      transition:
+        border-color 120ms ease,
+        box-shadow 120ms ease;
+    }
+
+    input:focus,
+    textarea:focus,
+    select:focus {
+      border-color: #0969da;
+
+      box-shadow:
+        0 0 0 3px rgba(9, 105, 218, 0.12);
+    }
+
+    textarea {
+      min-height: 110px;
+      resize: vertical;
+    }
+
+    .hint {
+      margin-top: 5px;
+
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    /* --------------------------------
+       Asset upload
+    -------------------------------- */
+
+    .dropzone {
+      padding: 30px 20px;
+
+      border: 1px dashed #afb8c1;
+      border-radius: 7px;
+
+      background: var(--surface-subtle);
+
+      text-align: center;
+
+      transition:
+        border-color 120ms ease,
+        background 120ms ease;
+    }
+
+    .dropzone.dragover {
+      border-color: #0969da;
+      background: #ddf4ff;
+    }
+
+    .upload-icon {
+      width: 38px;
+      height: 38px;
+
+      display: grid;
+      place-items: center;
+
+      margin: 0 auto 10px;
+
+      border: 1px solid var(--border);
+      border-radius: 8px;
+
+      background: white;
+
+      font-size: 17px;
+    }
+
+    .dropzone strong {
+      display: block;
+      margin-bottom: 3px;
+    }
+
+    .dropzone p {
+      margin: 0 0 14px;
+
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .file-label {
+      display: inline-block;
+
+      padding: 7px 13px;
+
+      border: 1px solid var(--border);
+      border-radius: 6px;
+
+      background: white;
+
+      cursor: pointer;
+
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .file-label:hover {
+      background: #f3f4f6;
+    }
+
+    #asset {
+      display: none;
+    }
+
+    .file-selected {
+      margin-top: 13px;
+
+      color: var(--green);
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    /* --------------------------------
+       Dynamic rows
+    -------------------------------- */
+
+    .array-row {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 8px;
+
+      margin-bottom: 8px;
+    }
+
+    .local-row {
+      display: grid;
+      grid-template-columns: 0.7fr 1fr auto;
+      gap: 8px;
+
+      margin-bottom: 8px;
+    }
+
+    .source-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr auto;
+      gap: 8px;
+
+      margin-bottom: 8px;
+    }
+
+    /* --------------------------------
+       Buttons
+    -------------------------------- */
+
+    button {
+      border: 0;
+      border-radius: 6px;
+
+      padding: 8px 13px;
+
+      cursor: pointer;
+
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background: var(--accent-hover);
+    }
+
+    .btn-secondary {
+      border: 1px solid var(--border);
+      background: white;
+      color: var(--text);
+    }
+
+    .btn-secondary:hover {
+      background: var(--surface-subtle);
+    }
+
+    .btn-danger {
+      padding: 8px 10px;
+
+      border: 1px solid #ffcecb;
+      background: var(--red-bg);
+      color: var(--red);
+    }
+
+    .add-button {
+      margin-top: 4px;
+    }
+
+    /* --------------------------------
+       Source toggle
+    -------------------------------- */
+
+    .source-type {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+
+    .source-option {
+      position: relative;
+    }
+
+    .source-option input {
+      position: absolute;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .source-option label {
+      display: block;
+
+      margin: 0;
+      padding: 13px;
+
+      border: 1px solid var(--border);
+      border-radius: 7px;
+
+      cursor: pointer;
+    }
+
+    .source-option label strong {
+      display: block;
+      margin-bottom: 2px;
+    }
+
+    .source-option label span {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 400;
+    }
+
+    .source-option input:checked + label {
+      border-color: var(--text);
+      box-shadow: inset 0 0 0 1px var(--text);
+    }
+
+    /* --------------------------------
+       Actions
+    -------------------------------- */
+
+    .actions-card {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+
+      padding: 18px 20px;
+    }
+
+    .actions-info {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .actions {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    /* --------------------------------
+       Output
+    -------------------------------- */
+
+    .output {
+      display: none;
+    }
+
+    .output.visible {
+      display: block;
+    }
+
+    .output-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+    }
+
+    pre {
+      margin: 0;
+
+      padding: 18px;
+
+      overflow: auto;
+
+      border-radius: 7px;
+
+      background: #0d1117;
+      color: #e6edf3;
+
+      font-family:
+        ui-monospace,
+        SFMono-Regular,
+        Menlo,
+        Monaco,
+        Consolas,
+        monospace;
+
+      font-size: 12px;
+      line-height: 1.65;
+    }
+
+    .success {
+      margin-top: 12px;
+
+      color: var(--green);
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .error {
+      margin-top: 12px;
+
+      color: var(--red);
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    /* --------------------------------
+       Community callout
+    -------------------------------- */
+
+    .community {
+      margin-top: 26px;
+      padding: 17px 18px;
+
+      border: 1px solid var(--border);
+      border-radius: 8px;
+
+      background: var(--surface);
+    }
+
+    .community strong {
+      display: block;
+      margin-bottom: 3px;
+    }
+
+    .community p {
+      margin: 0;
+
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .community code {
+      padding: 2px 4px;
+
+      border-radius: 4px;
+
+      background: #eef0f2;
+
+      font-family:
+        ui-monospace,
+        monospace;
+    }
+
+    /* --------------------------------
+       Responsive
+    -------------------------------- */
+
+    @media (max-width: 700px) {
+
+      .page {
+        padding-top: 30px;
+      }
+
+      .progress {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .progress-item:nth-child(2) {
+        border-right: 0;
+      }
+
+      .progress-item:nth-child(-n + 2) {
+        border-bottom: 1px solid var(--border);
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .local-row,
+      .source-row {
+        grid-template-columns: 1fr;
+      }
+
+      .source-type {
+        grid-template-columns: 1fr;
+      }
+
+      .actions-card {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ===============================
+       Header
+  ================================ -->
+
+  <header class="topbar">
+
+    <div class="topbar-inner">
+
+      <a href="#" class="brand">
+        <span class="brand-mark">M</span>
+        Mudra
+        <span>/ metadata</span>
+      </a>
+
+      <a
+        href="https://github.com/"
+        class="github-link"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Contribute on GitHub →
+      </a>
+
+    </div>
+
+  </header>
+
+
+  <main class="page">
+
+    <!-- ===============================
+         Intro
+    ================================ -->
+
+    <section class="intro">
+
+      <div class="eyebrow">
+        <span class="eyebrow-dot"></span>
+        COMMUNITY CONTRIBUTION TOOL
+      </div>
+
+      <h1>Prepare your Mudra asset.</h1>
+
+      <p>
+        Add the cultural context behind your artwork and generate the
+        <code>metadata.json</code> that goes with your contribution.
+        No account. No upload. No SVG processing.
+      </p>
+
+    </section>
+
+
+    <!-- ===============================
+         Progress
+    ================================ -->
+
+    <nav class="progress">
+
+      <div class="progress-item active">
+        <span class="progress-number">1</span>
+        Asset
+      </div>
+
+      <div class="progress-item active">
+        <span class="progress-number">2</span>
+        Context
+      </div>
+
+      <div class="progress-item active">
+        <span class="progress-number">3</span>
+        Attribution
+      </div>
+
+      <div class="progress-item active">
+        <span class="progress-number">4</span>
+        Generate
+      </div>
+
+    </nav>
+
+
+    <!-- ===============================
+         01 Asset
+    ================================ -->
+
+    <section class="card">
+
+      <div class="card-header">
+
+        <div class="card-number">01</div>
+
+        <div>
+          <h2>Your asset</h2>
+
+          <p>
+            Select the file you are contributing.
+          </p>
+        </div>
+
+      </div>
+
+      <div class="card-body">
+
+        <div
+          id="dropzone"
+          class="dropzone"
+        >
+
+          <div class="upload-icon">↑</div>
+
+          <strong>
+            Bring your asset into the editor
+          </strong>
+
+          <p>
+            SVG, PNG, JPG or WebP · the file stays on your device
+          </p>
+
+          <label
+            for="asset"
+            class="file-label"
+          >
+            Choose asset
+          </label>
+
+          <input
+            id="asset"
+            type="file"
+            accept=".svg,.png,.jpg,.jpeg,.webp"
+          />
+
+          <div
+            id="fileName"
+            class="file-selected"
+          ></div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ===============================
+         02 Context
+    ================================ -->
+
+    <section class="card">
+
+      <div class="card-header">
+
+        <div class="card-number">02</div>
+
+        <div>
+          <h2>Cultural context</h2>
+
+          <p>
+            Tell the community what this asset represents.
+          </p>
+        </div>
+
+      </div>
+
+      <div class="card-body">
+
+        <div class="grid">
+
+          <div class="field">
+
+            <label for="name">
+              Name <span class="required">*</span>
+            </label>
+
+            <input
+              id="name"
+              type="text"
+              maxlength="100"
+              placeholder="Chenda"
+            />
+
+            <div class="hint">
+              The human-readable name of the cultural subject.
+            </div>
+
+          </div>
+
+
+          <div class="field">
+
+            <label for="slug">
+              Slug <span class="required">*</span>
+            </label>
+
+            <input
+              id="slug"
+              type="text"
+              placeholder="chenda"
+            />
+
+            <div class="hint">
+              Example: <code>chenda</code>,
+              <code>onam-sadhya</code>
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <div class="field">
+
+          <label for="category">
+            Category <span class="required">*</span>
+          </label>
+
+          <select id="category">
+
+            <option value="">
+              Select a category
+            </option>
+
+            <option value="architecture">Architecture</option>
+            <option value="art">Art</option>
+            <option value="clothing">Clothing</option>
+            <option value="craft">Craft</option>
+            <option value="festival">Festival</option>
+            <option value="food">Food</option>
+            <option value="instrument">Instrument</option>
+            <option value="music">Music</option>
+            <option value="object">Object</option>
+            <option value="pattern">Pattern</option>
+            <option value="performing-art">Performing Art</option>
+            <option value="symbol">Symbol</option>
+            <option value="tradition">Tradition</option>
+            <option value="transport">Transport</option>
+
+          </select>
+
+        </div>
+
+
+        <div class="field">
+
+          <label for="description">
+            Description <span class="required">*</span>
+          </label>
+
+          <textarea
+            id="description"
+            minlength="10"
+            maxlength="1000"
+            placeholder="A traditional percussion instrument widely used in Kerala's temple and cultural traditions..."
+          ></textarea>
+
+          <div class="hint">
+            Keep it factual and culturally respectful. 10–1000 characters.
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ===============================
+         Regions
+    ================================ -->
+
+    <section class="card">
+
+      <div class="card-header">
+
+        <div class="card-number">03</div>
+
+        <div>
+          <h2>Where is it from?</h2>
+
+          <p>
+            Add the Indian regions associated with the subject.
+          </p>
+        </div>
+
+      </div>
+
+      <div class="card-body">
+
+        <div id="regions"></div>
+
+        <button
+          type="button"
+          class="btn-secondary add-button"
+          onclick="addRegion()"
+        >
+          + Add region
+        </button>
+
+      </div>
+
+    </section>
+
+
+    <!-- ===============================
+         Local names
+    ================================ -->
+
+    <section class="card">
+
+      <div class="card-header">
+
+        <div class="card-number">04</div>
+
+        <div>
+          <h2>Local names</h2>
+
+          <p>
+            Help people discover this subject in its local languages.
+          </p>
+        </div>
+
+      </div>
+
+      <div class="card-body">
+
+        <div id="localNames"></div>
+
+        <button
+          type="button"
+          class="btn-secondary add-button"
+          onclick="addLocalName()"
+        >
+          + Add language
+        </button>
+
+      </div>
+
+    </section>
+
+
+    <!-- ===============================
+         Tags
+    ================================ -->
+
+    <section class="card">
+
+      <div class="card-header">
+
+        <div class="card-number">05</div>
+
+        <div>
+          <h2>Tags</h2>
+
+          <p>
+            Add keywords that help developers find your asset.
+          </p>
+        </div>
+
+      </div>
+
+      <div class="card-body">
+
+        <div id="tags"></div>
+
+        <button
+          type="button"
+          class="btn-secondary add-button"
+          onclick="addTag()"
+        >
+          + Add tag
+        </button>
+
+      </div>
+
+    </section>
+
+
+    <!-- ===============================
+         Creator
+    ================================ -->
+
+    <section class="card">
+
+      <div class="card-header">
+
+        <div class="card-number">06</div>
+
+        <div>
+          <h2>Contributor</h2>
+
+          <p>
+            Tell us who created and contributed the artwork.
+          </p>
+        </div>
+
+      </div>
+
+      <div class="card-body">
+
+        <div class="grid">
+
+          <div class="field">
+
+            <label for="creatorName">
+              Name <span class="required">*</span>
+            </label>
+
+            <input
+              id="creatorName"
+              type="text"
+              maxlength="100"
+              placeholder="Your name"
+            />
+
+          </div>
+
+
+          <div class="field">
+
+            <label for="github">
+              GitHub username
+            </label>
+
+            <input
+              id="github"
+              type="text"
+              placeholder="your-username"
+            />
+
+            <div class="hint">
+              Used for contributor attribution.
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ===============================
+         Source
+    ================================ -->
+
+    <section class="card">
+
+      <div class="card-header">
+
+        <div class="card-number">07</div>
+
+        <div>
+          <h2>Artwork source</h2>
+
+          <p>
+            Be transparent about how the artwork was created.
+          </p>
+        </div>
+
+      </div>
+
+      <div class="card-body">
+
+        <div class="source-type">
+
+          <div class="source-option">
+
+            <input
+              id="sourceOriginal"
+              name="sourceType"
+              type="radio"
+              value="original"
+            />
+
+            <label for="sourceOriginal">
+
+              <strong>Original</strong>
+
+              <span>
+                Created by you for Mudra.
+              </span>
+
+            </label>
+
+          </div>
+
+
+          <div class="source-option">
+
+            <input
+              id="sourceAdapted"
+              name="sourceType"
+              type="radio"
+              value="adapted"
+            />
+
+            <label for="sourceAdapted">
+
+              <strong>Adapted</strong>
+
+              <span>
+                Based on an existing work.
+              </span>
+
+            </label>
+
+          </div>
+
+        </div>
+
+
+        <div
+          id="adaptedFields"
+          style="display:none; margin-top:18px;"
+        >
+
+          <div class="field">
+
+            <label for="sourceUrl">
+              Original source URL <span class="required">*</span>
+            </label>
+
+            <input
+              id="sourceUrl"
+              type="url"
+              placeholder="https://..."
+            />
+
+          </div>
+
+
+          <div class="grid">
+
+            <div class="field">
+
+              <label for="sourceCreator">
+                Original creator
+              </label>
+
+              <input
+                id="sourceCreator"
+                type="text"
+                maxlength="200"
+                placeholder="Artist or creator"
+              />
+
+            </div>
+
+
+            <div class="field">
+
+              <label for="sourceLicense">
+                Original license <span class="required">*</span>
+              </label>
+
+              <input
+                id="sourceLicense"
+                type="text"
+                maxlength="100"
+                placeholder="CC-BY-4.0"
+              />
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ===============================
+         License
+    ================================ -->
+
+    <section class="card">
+
+      <div class="card-header">
+
+        <div class="card-number">08</div>
+
+        <div>
+          <h2>License</h2>
+
+          <p>
+            Choose the license applied to your contribution.
+          </p>
+        </div>
+
+      </div>
+
+      <div class="card-body">
+
+        <div class="field">
+
+          <label for="license">
+            Asset license <span class="required">*</span>
+          </label>
+
+          <select id="license">
+
+            <option value="CC-BY-4.0">
+              CC-BY-4.0
+            </option>
+
+          </select>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ===============================
+         Research
+    ================================ -->
+
+    <section class="card">
+
+      <div class="card-header">
+
+        <div class="card-number">09</div>
+
+        <div>
+          <h2>Research sources</h2>
+
+          <p>
+            Give the community references used to research the subject.
+          </p>
+        </div>
+
+      </div>
+
+      <div class="card-body">
+
+        <div id="sources"></div>
+
+        <button
+          type="button"
+          class="btn-secondary add-button"
+          onclick="addSource()"
+        >
+          + Add source
+        </button>
+
+      </div>
+
+    </section>
+
+
+    <!-- ===============================
+         Notes
+    ================================ -->
+
+    <section class="card">
+
+      <div class="card-header">
+
+        <div class="card-number">10</div>
+
+        <div>
+          <h2>Contributor notes</h2>
+
+          <p>
+            Anything maintainers should know about this contribution.
+          </p>
+        </div>
+
+      </div>
+
+      <div class="card-body">
+
+        <textarea
+          id="notes"
+          maxlength="1000"
+          placeholder="Optional notes for Mudra maintainers..."
+        ></textarea>
+
+      </div>
+
+    </section>
+
+
+    <!-- ===============================
+         Actions
+    ================================ -->
+
+    <section class="card">
+
+      <div class="actions-card">
+
+        <div class="actions-info">
+          Everything is generated locally in your browser.
+        </div>
+
+        <div class="actions">
+
+          <button
+            type="button"
+            class="btn-secondary"
+            onclick="resetEditor()"
+          >
+            Reset
+          </button>
+
+          <button
+            type="button"
+            class="btn-primary"
+            onclick="generateMetadata()"
+          >
+            Generate metadata.json
+          </button>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <div id="status"></div>
+
+
+    <!-- ===============================
+         Output
+    ================================ -->
+
+    <section
+      id="output"
+      class="card output"
+    >
+
+      <div class="card-header">
+
+        <div class="card-number">✓</div>
+
+        <div style="width:100%;">
+
+          <div class="output-header">
+
+            <div>
+              <h2>Your metadata is ready</h2>
+
+              <p>
+                Review it, then add it alongside your asset in your PR.
+              </p>
+            </div>
+
+            <button
+              type="button"
+              class="btn-secondary"
+              onclick="copyMetadata()"
+            >
+              Copy JSON
+            </button>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="card-body">
+
+        <pre id="jsonOutput"></pre>
+
+        <div class="actions" style="margin-top:14px;">
+
+          <button
+            type="button"
+            class="btn-primary"
+            onclick="downloadMetadata()"
+          >
+            Save metadata.json
+          </button>
+
+        </div>
+
+        <div id="copyStatus"></div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ===============================
+         Community message
+    ================================ -->
+
+    <aside class="community">
+
+      <strong>
+        Built by contributors, for contributors.
+      </strong>
+
+      <p>
+        Mudra is a community collection. Your artwork, metadata and
+        research become part of an open ecosystem that developers can
+        use in websites, React applications, npm packages and other
+        projects.
+        <br><br>
+        Once you're happy with the metadata, add the asset and
+        <code>metadata.json</code> to your contribution and open a PR.
+      </p>
+
+    </aside>
+
+  </main>
+
+
+  <script>
+
+    /*
+     * ============================================
+     * Mudra Metadata Editor
+     * ============================================
+     *
+     * IMPORTANT:
+     *
+     * The selected asset is NEVER read.
+     *
+     * We only access:
+     *
+     *     file.name
+     *
+     * No FileReader.
+     * No SVG parsing.
+     * No XML parsing.
+     * No upload.
+     * No network request.
+     *
+     * The filename is used to suggest name + slug.
+     */
+
+
+    let selectedFileName = "";
+
+
+    /* --------------------------------------------
+       Asset
+    -------------------------------------------- */
+
+    const assetInput =
+      document.getElementById("asset");
+
+    const dropzone =
+      document.getElementById("dropzone");
+
+    const fileNameOutput =
+      document.getElementById("fileName");
+
+
+    assetInput.addEventListener(
+      "change",
+      handleFile
+    );
+
+
+    function handleFile() {
+
+      const file =
+        assetInput.files[0];
+
+      if (!file) {
+
+        selectedFileName = "";
+
+        fileNameOutput.textContent = "";
+
+        return;
+      }
+
+
+      selectedFileName =
+        file.name;
+
+
+      fileNameOutput.textContent =
+        `✓ ${file.name}`;
+
+
+      /*
+       * Use filename only.
+       *
+       * chenda.svg
+       *      ↓
+       * Chenda
+       *
+       * onam-sadhya.svg
+       *      ↓
+       * Onam Sadhya
+       */
+
+      const filename =
+        file.name.replace(/\.[^/.]+$/, "");
+
+
+      const generatedName =
+        filename
+          .replace(/[-_]+/g, " ")
+          .replace(/\s+/g, " ")
+          .trim()
+          .replace(/\b\w/g, char =>
+            char.toUpperCase()
+          );
+
+
+      document.getElementById("name").value =
+        generatedName;
+
+
+      document.getElementById("slug").value =
+        createSlug(filename);
+    }
+
+
+    /*
+     * Drag and drop
+     */
+
+    dropzone.addEventListener(
+      "dragover",
+      event => {
+
+        event.preventDefault();
+
+        dropzone.classList.add("dragover");
+      }
+    );
+
+
+    dropzone.addEventListener(
+      "dragleave",
+      () => {
+
+        dropzone.classList.remove("dragover");
+      }
+    );
+
+
+    dropzone.addEventListener(
+      "drop",
+      event => {
+
+        event.preventDefault();
+
+        dropzone.classList.remove("dragover");
+
+        const file =
+          event.dataTransfer.files[0];
+
+        if (!file) return;
+
+        /*
+         * Transfer the file into the normal input.
+         * The file is still never read.
+         */
+
+        const transfer =
+          new DataTransfer();
+
+        transfer.items.add(file);
+
+        assetInput.files =
+          transfer.files;
+
+        handleFile();
+      }
+    );
+
+
+    /* --------------------------------------------
+       Helpers
+    -------------------------------------------- */
+
+    function createSlug(value) {
+
+      return value
+        .toLowerCase()
+        .trim()
+        .replace(/[^a-z0-9]+/g, "-")
+        .replace(/^-+|-+$/g, "");
+    }
+
+
+    function escapeAttribute(value) {
+
+      return String(value)
+        .replace(/&/g, "&amp;")
+        .replace(/"/g, "&quot;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;");
+    }
+
+
+    function isValidUrl(value) {
+
+      try {
+
+        new URL(value);
+
+        return true;
+
+      } catch {
+
+        return false;
+      }
+    }
+
+
+    /* --------------------------------------------
+       Regions
+    -------------------------------------------- */
+
+    function addRegion(value = "") {
+
+      const container =
+        document.getElementById("regions");
+
+
+      const row =
+        document.createElement("div");
+
+      row.className =
+        "array-row";
+
+
+      row.innerHTML = `
+        <input
+          type="text"
+          class="region-input"
+          placeholder="kerala"
+          value="${escapeAttribute(value)}"
+        />
+
+        <button
+          type="button"
+          class="btn-danger"
+          onclick="this.parentElement.remove()"
+        >
+          Remove
+        </button>
+      `;
+
+
+      container.appendChild(row);
+    }
+
+
+    /* --------------------------------------------
+       Local names
+    -------------------------------------------- */
+
+    function addLocalName(
+      language = "",
+      name = ""
+    ) {
+
+      const container =
+        document.getElementById("localNames");
+
+
+      const row =
+        document.createElement("div");
+
+      row.className =
+        "local-row";
+
+
+      row.innerHTML = `
+        <input
+          type="text"
+          class="language-input"
+          placeholder="malayalam"
+          value="${escapeAttribute(language)}"
+        />
+
+        <input
+          type="text"
+          class="local-name-input"
+          placeholder="ചെണ്ട"
+          value="${escapeAttribute(name)}"
+        />
+
+        <button
+          type="button"
+          class="btn-danger"
+          onclick="this.parentElement.remove()"
+        >
+          Remove
+        </button>
+      `;
+
+
+      container.appendChild(row);
+    }
+
+
+    /* --------------------------------------------
+       Tags
+    -------------------------------------------- */
+
+    function addTag(value = "") {
+
+      const container =
+        document.getElementById("tags");
+
+
+      const row =
+        document.createElement("div");
+
+      row.className =
+        "array-row";
+
+
+      row.innerHTML = `
+        <input
+          type="text"
+          class="tag-input"
+          placeholder="percussion"
+          value="${escapeAttribute(value)}"
+        />
+
+        <button
+          type="button"
+          class="btn-danger"
+          onclick="this.parentElement.remove()"
+        >
+          Remove
+        </button>
+      `;
+
+
+      container.appendChild(row);
+    }
+
+
+    /* --------------------------------------------
+       Sources
+    -------------------------------------------- */
+
+    function addSource(
+      title = "",
+      url = ""
+    ) {
+
+      const container =
+        document.getElementById("sources");
+
+
+      const row =
+        document.createElement("div");
+
+      row.className =
+        "source-row";
+
+
+      row.innerHTML = `
+        <input
+          type="text"
+          class="source-title-input"
+          placeholder="Reference title"
+          value="${escapeAttribute(title)}"
+        />
+
+        <input
+          type="url"
+          class="source-url-input"
+          placeholder="https://..."
+          value="${escapeAttribute(url)}"
+        />
+
+        <button
+          type="button"
+          class="btn-danger"
+          onclick="this.parentElement.remove()"
+        >
+          Remove
+        </button>
+      `;
+
+
+      container.appendChild(row);
+    }
+
+
+    /* --------------------------------------------
+       Source type
+    -------------------------------------------- */
+
+    document
+      .querySelectorAll(
+        'input[name="sourceType"]'
+      )
+      .forEach(input => {
+
+        input.addEventListener(
+          "change",
+          () => {
+
+            const adapted =
+              document.getElementById(
+                "sourceAdapted"
+              ).checked;
+
+
+            document.getElementById(
+              "adaptedFields"
+            ).style.display =
+              adapted
+                ? "block"
+                : "none";
+          }
+        );
+      });
+
+
+    /* --------------------------------------------
+       Status
+    -------------------------------------------- */
+
+    function showError(message) {
+
+      const status =
+        document.getElementById("status");
+
+      status.className =
+        "error";
+
+      status.textContent =
+        message;
+
+      status.scrollIntoView({
+        behavior: "smooth",
+        block: "center"
+      });
+    }
+
+
+    function showSuccess(message) {
+
+      const status =
+        document.getElementById("status");
+
+      status.className =
+        "success";
+
+      status.textContent =
+        message;
+    }
+
+
+    function clearStatus() {
+
+      const status =
+        document.getElementById("status");
+
+      status.className = "";
+
+      status.textContent = "";
+    }
+
+
+    /* --------------------------------------------
+       Generate metadata
+    -------------------------------------------- */
+
+    function generateMetadata() {
+
+      clearStatus();
+
+
+      if (!assetInput.files.length) {
+
+        showError(
+          "Select the asset you're contributing first."
+        );
+
+        return;
+      }
+
+
+      const name =
+        document
+          .getElementById("name")
+          .value
+          .trim();
+
+
+      const slug =
+        document
+          .getElementById("slug")
+          .value
+          .trim();
+
+
+      const category =
+        document
+          .getElementById("category")
+          .value;
+
+
+      const description =
+        document
+          .getElementById("description")
+          .value
+          .trim();
+
+
+      const creatorName =
+        document
+          .getElementById("creatorName")
+          .value
+          .trim();
+
+
+      const github =
+        document
+          .getElementById("github")
+          .value
+          .trim();
+
+
+      const sourceType =
+        document.querySelector(
+          'input[name="sourceType"]:checked'
+        )?.value;
+
+
+      const license =
+        document
+          .getElementById("license")
+          .value;
+
+
+      /* ------------------------------------------
+         Required validation
+      ------------------------------------------ */
+
+      if (!name) {
+
+        showError("Name is required.");
+
+        return;
+      }
+
+
+      if (
+        !slug ||
+        !/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(slug)
+      ) {
+
+        showError(
+          "Slug must use lowercase letters, numbers and hyphens."
+        );
+
+        return;
+      }
+
+
+      if (!category) {
+
+        showError(
+          "Choose a category for the asset."
+        );
+
+        return;
+      }
+
+
+      if (description.length < 10) {
+
+        showError(
+          "Description must contain at least 10 characters."
+        );
+
+        return;
+      }
+
+
+      if (!creatorName) {
+
+        showError(
+          "Add your name as the contributor."
+        );
+
+        return;
+      }
+
+
+      if (!sourceType) {
+
+        showError(
+          "Tell us whether the artwork is original or adapted."
+        );
+
+        return;
+      }
+
+
+      /* ------------------------------------------
+         Regions
+      ------------------------------------------ */
+
+      const regions = [
+        ...document.querySelectorAll(
+          ".region-input"
+        )
+      ]
+        .map(input =>
+          createSlug(input.value)
+        )
+        .filter(Boolean);
+
+
+      if (!regions.length) {
+
+        showError(
+          "Add at least one associated region."
+        );
+
+        return;
+      }
+
+
+      /* ------------------------------------------
+         Tags
+      ------------------------------------------ */
+
+      const tags = [
+        ...document.querySelectorAll(
+          ".tag-input"
+        )
+      ]
+        .map(input =>
+          createSlug(input.value)
+        )
+        .filter(Boolean);
+
+
+      if (!tags.length) {
+
+        showError(
+          "Add at least one searchable tag."
+        );
+
+        return;
+      }
+
+
+      if (tags.length > 20) {
+
+        showError(
+          "Mudra allows a maximum of 20 tags."
+        );
+
+        return;
+      }
+
+
+      /* ------------------------------------------
+         Local names
+      ------------------------------------------ */
+
+      const localNames = {};
+
+
+      const languages =
+        document.querySelectorAll(
+          ".language-input"
+        );
+
+
+      const localNameInputs =
+        document.querySelectorAll(
+          ".local-name-input"
+        );
+
+
+      for (
+        let i = 0;
+        i < languages.length;
+        i++
+      ) {
+
+        const language =
+          languages[i]
+            .value
+            .trim();
+
+
+        const localName =
+          localNameInputs[i]
+            .value
+            .trim();
+
+
+        if (language && localName) {
+
+          localNames[language] =
+            localName;
+        }
+      }
+
+
+      /* ------------------------------------------
+         Creator
+      ------------------------------------------ */
+
+      const creator = {
+        name: creatorName
+      };
+
+
+      if (github) {
+
+        if (
+          !/^[A-Za-z0-9-]+$/.test(github)
+        ) {
+
+          showError(
+            "GitHub username contains invalid characters."
+          );
+
+          return;
+        }
+
+
+        creator.github =
+          github;
+      }
+
+
+      /* ------------------------------------------
+         Artwork source
+      ------------------------------------------ */
+
+      const source = {
+        type: sourceType
+      };
+
+
+      if (sourceType === "adapted") {
+
+        const sourceUrl =
+          document
+            .getElementById("sourceUrl")
+            .value
+            .trim();
+
+
+        const sourceCreator =
+          document
+            .getElementById("sourceCreator")
+            .value
+            .trim();
+
+
+        const sourceLicense =
+          document
+            .getElementById("sourceLicense")
+            .value
+            .trim();
+
+
+        if (!sourceUrl) {
+
+          showError(
+            "Adapted artwork needs an original source URL."
+          );
+
+          return;
+        }
+
+
+        if (!isValidUrl(sourceUrl)) {
+
+          showError(
+            "The original source URL is not valid."
+          );
+
+          return;
+        }
+
+
+        if (!sourceLicense) {
+
+          showError(
+            "Add the original license for adapted artwork."
+          );
+
+          return;
+        }
+
+
+        source.url =
+          sourceUrl;
+
+
+        if (sourceCreator) {
+
+          source.creator =
+            sourceCreator;
+        }
+
+
+        source.license =
+          sourceLicense;
+      }
+
+
+      /* ------------------------------------------
+         Research sources
+      ------------------------------------------ */
+
+      const sources = [];
+
+
+      const sourceTitles =
+        document.querySelectorAll(
+          ".source-title-input"
+        );
+
+
+      const sourceUrls =
+        document.querySelectorAll(
+          ".source-url-input"
+        );
+
+
+      for (
+        let i = 0;
+        i < sourceTitles.length;
+        i++
+      ) {
+
+        const title =
+          sourceTitles[i]
+            .value
+            .trim();
+
+
+        const url =
+          sourceUrls[i]
+            .value
+            .trim();
+
+
+        if (title && url) {
+
+          if (!isValidUrl(url)) {
+
+            showError(
+              `Invalid research URL: ${url}`
+            );
+
+            return;
+          }
+
+
+          sources.push({
+            title,
+            url
+          });
+        }
+      }
+
+
+      if (!sources.length) {
+
+        showError(
+          "Add at least one research source."
+        );
+
+        return;
+      }
+
+
+      /* ------------------------------------------
+         Build metadata
+      ------------------------------------------ */
+
+      const metadata = {
+
+        name,
+
+        slug,
+
+        region: [
+          ...new Set(regions)
+        ],
+
+        category,
+
+        description
+
+      };
+
+
+      if (
+        Object.keys(localNames).length
+      ) {
+
+        metadata.localNames =
+          localNames;
+      }
+
+
+      metadata.tags =
+        [
+          ...new Set(tags)
+        ];
+
+
+      metadata.creator =
+        creator;
+
+
+      metadata.source =
+        source;
+
+
+      metadata.license =
+        license;
+
+
+      metadata.sources =
+        sources;
+
+
+      const notes =
+        document
+          .getElementById("notes")
+          .value
+          .trim();
+
+
+      if (notes) {
+
+        metadata.notes =
+          notes;
+      }
+
+
+      /* ------------------------------------------
+         Display
+      ------------------------------------------ */
+
+      const json =
+        JSON.stringify(
+          metadata,
+          null,
+          2
+        );
+
+
+      document.getElementById(
+        "jsonOutput"
+      ).textContent =
+        json;
+
+
+      document.getElementById(
+        "output"
+      ).classList.add("visible");
+
+
+      showSuccess(
+        "Metadata generated locally."
+      );
+
+
+      document.getElementById(
+        "output"
+      ).scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+      });
+    }
+
+
+    /* --------------------------------------------
+       Copy
+    -------------------------------------------- */
+
+    async function copyMetadata() {
+
+      const json =
+        document.getElementById(
+          "jsonOutput"
+        ).textContent;
+
+
+      try {
+
+        await navigator.clipboard.writeText(
+          json
+        );
+
+
+        document.getElementById(
+          "copyStatus"
+        ).className =
+          "success";
+
+
+        document.getElementById(
+          "copyStatus"
+        ).textContent =
+          "Copied to clipboard.";
+
+      } catch {
+
+        document.getElementById(
+          "copyStatus"
+        ).className =
+          "error";
+
+
+        document.getElementById(
+          "copyStatus"
+        ).textContent =
+          "Clipboard access failed. Copy the JSON manually.";
+      }
+    }
+
+
+    /* --------------------------------------------
+       Download
+    -------------------------------------------- */
+
+    function downloadMetadata() {
+
+      const json =
+        document.getElementById(
+          "jsonOutput"
+        ).textContent;
+
+
+      const blob =
+        new Blob(
+          [json],
+          {
+            type: "application/json"
+          }
+        );
+
+
+      const url =
+        URL.createObjectURL(blob);
+
+
+      const anchor =
+        document.createElement("a");
+
+
+      anchor.href =
+        url;
+
+
+      anchor.download =
+        "metadata.json";
+
+
+      document.body.appendChild(
+        anchor
+      );
+
+
+      anchor.click();
+
+
+      anchor.remove();
+
+
+      URL.revokeObjectURL(
+        url
+      );
+    }
+
+
+    /* --------------------------------------------
+       Reset
+    -------------------------------------------- */
+
+    function resetEditor() {
+
+      document.querySelectorAll(
+        "input:not([type='radio']), textarea, select"
+      ).forEach(element => {
+
+        element.value = "";
+      });
+
+
+      document.querySelectorAll(
+        'input[name="sourceType"]'
+      ).forEach(input => {
+
+        input.checked = false;
+      });
+
+
+      document.getElementById(
+        "regions"
+      ).innerHTML = "";
+
+
+      document.getElementById(
+        "localNames"
+      ).innerHTML = "";
+
+
+      document.getElementById(
+        "tags"
+      ).innerHTML = "";
+
+
+      document.getElementById(
+        "sources"
+      ).innerHTML = "";
+
+
+      document.getElementById(
+        "adaptedFields"
+      ).style.display =
+        "none";
+
+
+      document.getElementById(
+        "output"
+      ).classList.remove(
+        "visible"
+      );
+
+
+      document.getElementById(
+        "fileName"
+      ).textContent = "";
+
+
+      selectedFileName = "";
+
+
+      clearStatus();
+
+
+      addRegion();
+      addTag();
+      addSource();
+    }
+
+
+    /* --------------------------------------------
+       Initial fields
+    -------------------------------------------- */
+
+    addRegion();
+    addTag();
+    addSource();
+
+  </script>
+
+</body>
+</html>
