@@ -1,0 +1,38 @@
+{
+  "name": "Nalukettu",
+  "slug": "nalukettu",
+  "region": ["kerala"],
+  "category": "architecture",
+  "description": "A traditional quadrangular courtyard house from Kerala, embodying the principles of Vastu Shastra. Built primarily from laterite, timber, and clay tiles, it serves as the ancestral home reflecting the state's agrarian lifestyle and joint family system.",
+  "localNames": {
+    "ml": "നാലുകെട്ട്"
+  },
+  "tags": [
+    "architecture",
+    "kerala",
+    "traditional-house",
+    "courtyard",
+    "vastu",
+    "heritage",
+    "timber",
+    "homestay"
+  ],
+  "creator": {
+    "name": "Mudra Community"
+  },
+  "source": {
+    "type": "original"
+  },
+  "license": "CC-BY-4.0",
+  "sources": [
+    {
+      "title": "Kerala Tourism - Traditional Architecture and Heritage",
+      "url": "https://keralatourism.org"
+    },
+    {
+      "title": "INTACH Kerala Chapter - Documentation of Traditional Homes",
+      "url": "https://intach.org"
+    }
+  ],
+  "notes": "The Nalukettu is defined by its central open-to-sky courtyard known as the Nadumuttom, which facilitates natural ventilation and daylighting. The structure typically features a Poomukham (front verandah), Charupadi (built-in wooden benches), and a distinctive steeply pitched roof with terracotta tiles designed to handle heavy monsoon rains. The gable end, or Mukhappu, often features intricately carved wooden panels."
+}
