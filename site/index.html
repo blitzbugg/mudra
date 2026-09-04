@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mudra · India, in Open Source</title>
+  <style>
+    :root {
+      --bg: #fafafa;
+      --surface: #ffffff;
+      --text: #1f2328;
+      --muted: #656d76;
+      --border: #d0d7de;
+      --accent: #24292f;
+      --accent-hover: #323941;
+      --green: #1a7f37;
+      --purple: #8250df;
+      --radius: 8px;
+      --shadow: 0 1px 2px rgba(27,31,36,0.04), 0 3px 8px rgba(27,31,36,0.04);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+      line-height: 1.6;
+    }
+    .hero {
+      text-align: center;
+      padding: 80px 24px 60px;
+      max-width: 720px;
+      margin: 0 auto;
+    }
+    .hero h1 {
+      font-size: 2.8rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 8px;
+    }
+    .hero .tagline {
+      font-size: 1.25rem;
+      color: var(--muted);
+      margin-bottom: 32px;
+    }
+    .hero p {
+      font-size: 1.05rem;
+      color: var(--muted);
+      max-width: 540px;
+      margin: 0 auto 40px;
+    }
+    .btn-row {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 24px;
+      border-radius: var(--radius);
+      font-size: 0.95rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: background 0.15s, box-shadow 0.15s;
+    }
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+    }
+    .btn-primary:hover { background: var(--accent-hover); }
+    .btn-secondary {
+      background: var(--surface);
+      color: var(--text);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+    }
+    .btn-secondary:hover { background: var(--surface-subtle, #f6f7f8); }
+
+    .section {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0 24px 60px;
+    }
+    .section h2 {
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+    }
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+      box-shadow: var(--shadow);
+      text-decoration: none;
+      color: var(--text);
+      transition: box-shadow 0.15s, border-color 0.15s;
+    }
+    .card:hover {
+      border-color: var(--purple);
+      box-shadow: 0 2px 12px rgba(130,80,223,0.1);
+    }
+    .card .icon { font-size: 1.6rem; margin-bottom: 8px; }
+    .card h3 { font-size: 1rem; font-weight: 600; margin-bottom: 4px; }
+    .card p { font-size: 0.85rem; color: var(--muted); }
+
+    .how {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 32px;
+      box-shadow: var(--shadow);
+    }
+    .how ol {
+      padding-left: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .how li {
+      font-size: 0.95rem;
+    }
+    .how code {
+      background: #f0f0f0;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 0.85rem;
+    }
+
+    footer {
+      text-align: center;
+      padding: 40px 24px;
+      color: var(--muted);
+      font-size: 0.85rem;
+      border-top: 1px solid var(--border);
+    }
+    footer a { color: var(--purple); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+
+  <div class="hero">
+    <h1>🎨 Mudra</h1>
+    <p class="tagline">India, in open source.</p>
+    <p>
+      An open-source, community-driven collection of authentic Indian cultural SVG assets
+      with structured metadata — built for developers, designers, and creators.
+    </p>
+    <div class="btn-row">
+      <a href="metadata-editor.html" class="btn btn-primary">✏️ Create Metadata</a>
+      <a href="https://github.com/blitzbugg/mudra" class="btn btn-secondary">⭐ GitHub</a>
+      <a href="https://github.com/blitzbugg/mudra/blob/main/CONTRIBUTING.md" class="btn btn-secondary">🤝 Contribute</a>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>What you can do</h2>
+    <div class="cards">
+      <a href="metadata-editor.html" class="card">
+        <div class="icon">📝</div>
+        <h3>Metadata Editor</h3>
+        <p>Fill in a form, get valid JSON. No coding required — perfect for first-time contributors.</p>
+      </a>
+      <a href="https://github.com/blitzbugg/mudra/tree/main/assets" class="card">
+        <div class="icon">📁</div>
+        <h3>Browse Assets</h3>
+        <p>Explore SVGs organized by region and category — Kerala instruments, traditions, patterns, and more.</p>
+      </a>
+      <a href="https://github.com/blitzbugg/mudra/blob/main/CONTRIBUTING.md" class="card">
+        <div class="icon">🚀</div>
+        <h3>Contribute</h3>
+        <p>Add your first SVG in minutes. Beginner-friendly workflow with automated validation.</p>
+      </a>
+      <a href="https://github.com/blitzbugg/mudra/blob/main/docs/ASSET_GUIDELINES.md" class="card">
+        <div class="icon">📐</div>
+        <h3>Asset Guidelines</h3>
+        <p>Quality standards for SVGs, metadata, naming, and cultural accuracy.</p>
+      </a>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>How to contribute</h2>
+    <div class="how">
+      <ol>
+        <li>Fork the <a href="https://github.com/blitzbugg/mudra">Mudra repository</a></li>
+        <li>Create your SVG (24×24 viewBox, clean paths, no scripts)</li>
+        <li>Use the <a href="metadata-editor.html">Metadata Editor</a> to generate valid metadata.json</li>
+        <li>Place files in <code>assets/india/kerala/&lt;category&gt;/&lt;asset-name&gt;/</code></li>
+        <li>Run <code>npm run validate</code> to check your contribution</li>
+        <li>Open a Pull Request — automated checks will verify everything</li>
+      </ol>
+    </div>
+  </div>
+
+  <footer>
+    Built with ❤️ by the <a href="https://github.com/blitzbugg/mudra/graphs/contributors">Mudra community</a>.
+    Licensed under <a href="https://github.com/blitzbugg/mudra/blob/main/LICENSE">MIT</a>.
+  </footer>
+
+</body>
+</html>
