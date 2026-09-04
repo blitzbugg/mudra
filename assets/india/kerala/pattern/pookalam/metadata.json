@@ -1,0 +1,35 @@
+{
+  "name": "Pookalam",
+  "slug": "pookalam",
+  "region": [
+    "kerala"
+  ],
+  "category": "festival",
+  "description": "Pookalam, also known as Athapookalam, is a colorful floral floor arrangement made during the harvest festival of Onam in Kerala. It consists of intricate circular patterns created using a variety of flower petals and leaves, symbolizing prosperity and welcoming the legendary King Mahabali.",
+  "localNames": {
+    "malayalam": "പൂക്കളം"
+  },
+  "tags": [
+    "festival",
+    "onam",
+    "flower",
+    "art",
+    "tradition",
+    "kerala"
+  ],
+  "creator": {
+    "name": "Ananthapadmanabhan M",
+    "github": "blitzbugg"
+  },
+  "source": {
+    "type": "original"
+  },
+  "license": "CC-BY-4.0",
+  "sources": [
+    {
+      "title": "Onam - Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/Onam"
+    }
+  ],
+  "notes": "Based on traditional Kerala floral designs"
+}
