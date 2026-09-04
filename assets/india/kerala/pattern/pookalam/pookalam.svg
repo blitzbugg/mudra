@@ -1,0 +1,91 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+  <defs>
+    <!-- Gradients -->
+    <radialGradient id="gradCenter" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FFF59D" />
+      <stop offset="100%" stop-color="#FDD835" />
+    </radialGradient>
+    <!-- Changed from Lavender to Traditional Deep Red/Maroon -->
+    <radialGradient id="gradRedRing" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#E53935" />
+      <stop offset="100%" stop-color="#B71C1C" />
+    </radialGradient>
+  </defs>
+
+  <!-- Background Base -->
+  <circle cx="12" cy="12" r="11.5" fill="#FFFDE7" stroke="#F0F4C3" stroke-width="0.5"/>
+
+  <!-- LAYER 1: Outer Green Leaves (Tulsi/Davana) -->
+  <g fill="#2E7D32">
+    <!-- 8 Green Pointed Leaves -->
+    <path d="M12 1.5 L13.5 5 L10.5 5 Z" />
+    <path d="M12 1.5 L13.5 5 L10.5 5 Z" transform="rotate(45 12 12)" />
+    <path d="M12 1.5 L13.5 5 L10.5 5 Z" transform="rotate(90 12 12)" />
+    <path d="M12 1.5 L13.5 5 L10.5 5 Z" transform="rotate(135 12 12)" />
+    <path d="M12 1.5 L13.5 5 L10.5 5 Z" transform="rotate(180 12 12)" />
+    <path d="M12 1.5 L13.5 5 L10.5 5 Z" transform="rotate(225 12 12)" />
+    <path d="M12 1.5 L13.5 5 L10.5 5 Z" transform="rotate(270 12 12)" />
+    <path d="M12 1.5 L13.5 5 L10.5 5 Z" transform="rotate(315 12 12)" />
+  </g>
+
+  <!-- Small Marigold/Orange Flowers (Chendumalli) -->
+  <g fill="#FF6F00">
+    <circle cx="12" cy="3.5" r="0.7" />
+    <circle cx="12" cy="3.5" r="0.7" transform="rotate(45 12 12)" />
+    <circle cx="12" cy="3.5" r="0.7" transform="rotate(90 12 12)" />
+    <circle cx="12" cy="3.5" r="0.7" transform="rotate(135 12 12)" />
+    <circle cx="12" cy="3.5" r="0.7" transform="rotate(180 12 12)" />
+    <circle cx="12" cy="3.5" r="0.7" transform="rotate(225 12 12)" />
+    <circle cx="12" cy="3.5" r="0.7" transform="rotate(270 12 12)" />
+    <circle cx="12" cy="3.5" r="0.7" transform="rotate(315 12 12)" />
+  </g>
+
+  <!-- LAYER 2: Middle Red Ring (Chemparathi) -->
+  <circle cx="12" cy="12" r="8.5" fill="url(#gradRedRing)" />
+
+  <!-- LAYER 3: Decorations inside Red Ring -->
+  
+  <!-- White Flowers (Erukku) - Traditionally used to contrast red -->
+  <g fill="#FFFFFF" opacity="0.95">
+    <!-- 4 Large White Flowers -->
+    <path d="M12 5 Q14 7 12 9 Q10 7 12 5 M12 5 Q10 7 12 9 Q14 7 12 5" transform="rotate(22.5 12 12)" />
+    <path d="M12 5 Q14 7 12 9 Q10 7 12 5 M12 5 Q10 7 12 9 Q14 7 12 5" transform="rotate(112.5 12 12)" />
+    <path d="M12 5 Q14 7 12 9 Q10 7 12 5 M12 5 Q10 7 12 9 Q14 7 12 5" transform="rotate(202.5 12 12)" />
+    <path d="M12 5 Q14 7 12 9 Q10 7 12 5 M12 5 Q10 7 12 9 Q14 7 12 5" transform="rotate(292.5 12 12)" />
+    
+    <!-- Yellow centers for white flowers -->
+    <circle cx="12" cy="6" r="0.6" fill="#FFEB3B" transform="rotate(22.5 12 12)"/>
+    <circle cx="12" cy="6" r="0.6" fill="#FFEB3B" transform="rotate(112.5 12 12)"/>
+    <circle cx="12" cy="6" r="0.6" fill="#FFEB3B" transform="rotate(202.5 12 12)"/>
+    <circle cx="12" cy="6" r="0.6" fill="#FFEB3B" transform="rotate(292.5 12 12)"/>
+  </g>
+
+  <!-- Blue Peacocks (State Bird) - Kept as accent, slightly darker blue -->
+  <g fill="#1E88E5">
+    <path d="M12 6.5 C13 7 13.5 9 12 10 C10.5 9 11 7 12 6.5 Z" transform="rotate(67.5 12 12)" />
+    <path d="M12 6.5 C13 7 13.5 9 12 10 C10.5 9 11 7 12 6.5 Z" transform="rotate(157.5 12 12)" />
+    <path d="M12 6.5 C13 7 13.5 9 12 10 C10.5 9 11 7 12 6.5 Z" transform="rotate(247.5 12 12)" />
+    <path d="M12 6.5 C13 7 13.5 9 12 10 C10.5 9 11 7 12 6.5 Z" transform="rotate(337.5 12 12)" />
+  </g>
+  
+  <!-- Traditional Oil Lamps (Nilavilakku abstract) - Now Gold/Yellow -->
+  <g fill="#FFC107">
+    <path d="M12 10 L12.5 11.5 L11.5 11.5 Z" transform="rotate(0 12 12)" />
+    <path d="M12 10 L12.5 11.5 L11.5 11.5 Z" transform="rotate(90 12 12)" />
+    <path d="M12 10 L12.5 11.5 L11.5 11.5 Z" transform="rotate(180 12 12)" />
+    <path d="M12 10 L12.5 11.5 L11.5 11.5 Z" transform="rotate(270 12 12)" />
+  </g>
+
+  <!-- LAYER 4: Center Yellow Area (Core Marigold cluster) -->
+  <circle cx="12" cy="12" r="4" fill="url(#gradCenter)" stroke="#F9A825" stroke-width="0.5"/>
+  
+  <!-- Center Flower Cluster (Thetti/Ixora style) -->
+  <g fill="#D32F2F">
+    <circle cx="12" cy="10" r="0.8" />
+    <circle cx="10" cy="12" r="0.8" />
+    <circle cx="12" cy="14" r="0.8" />
+    <circle cx="14" cy="12" r="0.8" />
+  </g>
+  <circle cx="12" cy="12" r="1" fill="#FF6F00" />
+
+</svg>
