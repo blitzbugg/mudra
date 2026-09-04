@@ -76,6 +76,33 @@ function validateSvg(filePath) {
     errors.push("Missing viewBox attribute on <svg> element");
   }
 
+  // Check for exact Mudra viewBox
+const viewBoxMatch = content.match(
+  /<svg\b[^>]*\bviewBox\s*=\s*["']([^"']+)["']/i
+);
+
+if (!viewBoxMatch) {
+  errors.push("Missing viewBox attribute on <svg> element");
+} else {
+  const viewBox = viewBoxMatch[1]
+    .trim()
+    .split(/\s+/)
+    .map(Number);
+
+  if (
+    viewBox.length !== 4 ||
+    !viewBox.every(Number.isFinite) ||
+    viewBox[0] !== 0 ||
+    viewBox[1] !== 0 ||
+    viewBox[2] !== 24 ||
+    viewBox[3] !== 24
+  ) {
+    errors.push(
+      `Invalid viewBox "${viewBoxMatch[1]}": Mudra SVGs must use viewBox="0 0 24 24"`
+    );
+  }
+}
+
   // Check for embedded raster images
   const rasterPatterns = [
     /<image[\s>][^>]*href\s*=\s*["']data:image\/(png|jpeg|jpg|webp|gif)/i,
