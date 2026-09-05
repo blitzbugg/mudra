@@ -1,0 +1,35 @@
+{
+  "name": "Aranmula Kannadi",
+  "slug": "aranmula-kannadi",
+  "region": [
+    "kerala"
+  ],
+  "category": "craft",
+  "description": "The Aranmula Kannadi is a unique handmade metal mirror produced in Aranmula, a village in Kerala. Unlike standard glass mirrors, it is made from a special metal alloy of copper and tin. It is front-surface reflective, giving it a distortion-free image, and is considered a bringer of good luck and prosperity, often included in the Vishukkani.",
+  "localNames": {
+    "malayalam": "ആറന്മുള കണ്ണാടി"
+  },
+  "tags": [
+    "craft",
+    "tradition",
+    "mirror",
+    "kerala",
+    "heritage",
+    "vishu"
+  ],
+  "creator": {
+    "name": "Ananthapadmanabhan",
+    "github": "blitzbugg"
+  },
+  "source": {
+    "type": "original"
+  },
+  "license": "CC-BY-4.0",
+  "sources": [
+    {
+      "title": "Aranmula Kannadi - Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/Aranmula_kannadi"
+    }
+  ],
+  "notes": "Representative of the unique metal-alloy mirror tradition of Kerala"
+}
