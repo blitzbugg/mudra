@@ -1,0 +1,35 @@
+{
+  "name": "Kerala Houseboat",
+  "slug": "kerala-houseboat",
+  "region": [
+    "kerala"
+  ],
+  "category": "transport",
+  "description": "A stylized icon of the Kettuvallam (Kerala Houseboat), featuring the distinctive black hull, arched wooden cabin windows, and curved roof, set against a backdrop of tropical palms found in the Kerala backwaters.",
+  "localNames": {
+    "malayalam": "കെട്ടുവള്ളം"
+  },
+  "tags": [
+    "transport",
+    "boat",
+    "backwaters",
+    "tourism",
+    "kerala",
+    "nature"
+  ],
+  "creator": {
+    "name": "Community AI",
+    "github": "community"
+  },
+  "source": {
+    "type": "original"
+  },
+  "license": "CC-BY-4.0",
+  "sources": [
+    {
+      "title": "Kettuvallam - Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/Kettuvallam"
+    }
+  ],
+  "notes": "Updated design includes black hull, arched windows, and palm tree backdrop"
+}
