@@ -1,0 +1,44 @@
+{
+  "name": "Nilavilakku",
+  "slug": "nilavilakku",
+  "region": [
+    "kerala",
+    "tamil-nadu"
+  ],
+  "category": "object",
+  "description": "A traditional brass or bronze oil lamp from Kerala and parts of South India, central to auspicious ceremonies, housewarmings, religious rituals, and performing arts like Kathakali and Mohiniyattam.",
+  "localNames": {
+    "ml": "നിലവിളക്ക്",
+    "ta": "குத்துவிளக்கு"
+  },
+  "tags": [
+    "lamp",
+    "oil-lamp",
+    "brass",
+    "bronze",
+    "kerala",
+    "traditional",
+    "ritual",
+    "auspicious",
+    "deepam",
+    "festival"
+  ],
+  "creator": {
+    "name": "Mudra Community"
+  },
+  "source": {
+    "type": "original"
+  },
+  "license": "CC-BY-4.0",
+  "sources": [
+    {
+      "title": "Kerala Tourism - Culture and Heritage",
+      "url": "https://keralatourism.org"
+    },
+    {
+      "title": "Crafts Council of India - Metalware Crafts",
+      "url": "https://craftscouncilofindia.org"
+    }
+  ],
+  "notes": "The Nilavilakku is lit using cotton wicks soaked in oil (typically coconut or sesame oil). Lighting the lamp symbolizes the removal of darkness and the presence of prosperity and divine knowledge. It features a broad base (peedam), a slender central pillar (thandoo), and a top reservoir (thattu) to hold wicks facing multiple directions."
+}
