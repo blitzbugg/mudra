@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+  <defs>
+    <!-- Bamboo Gradient (Warm Tan to Brown) -->
+    <linearGradient id="bambooGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#D7B875" />
+      <stop offset="50%" stop-color="#C19A6B" />
+      <stop offset="100%" stop-color="#B8860B" />
+    </linearGradient>
+  </defs>
+
+  <!-- Flute Group (Rotated diagonally for better icon composition) -->
+  <g transform="rotate(-30 12 12)">
+    
+    <!-- Main Bamboo Body -->
+    <rect x="2" y="10" width="20" height="4" rx="2" ry="2" fill="url(#bambooGrad)" />
+    
+    <!-- Bamboo Shine/Highlight -->
+    <line x1="3" y1="10.8" x2="21" y2="10.8" stroke="#E8D8B8" stroke-width="0.6" stroke-linecap="round" opacity="0.6"/>
+
+    <!-- Thread Bindings (Traditional dark thread at ends) -->
+    <!-- Left Binding (Near closed end/mouthpiece) -->
+    <rect x="3.5" y="10" width="1.5" height="4" rx="0.5" fill="#5D4037" />
+    <!-- Right Binding (Near open end) -->
+    <rect x="18" y="10" width="1.5" height="4" rx="0.5" fill="#5D=37" />
+    
+    <!-- Blow Hole (Embouchure) - Larger -->
+    <circle cx="6" cy="12" r="1" fill="#3E2723" />
+    <circle cx="6" cy="12" r="0.4" fill="#5D4037" opacity="0.5" /> <!-- Inner shadow -->
+    
+    <!-- Finger Holes -->
+    <circle cx="10" cy="12" r="0.6" fill="#3E2723" />
+    <circle cx="12.5" cy="12" r="0.6" fill="#3E2723" />
+    <circle cx="15" cy="12" r="0.6" fill="#3E2723" />
+    <circle cx="17.5" cy="12" r="0.6" fill="#3E2723" />
+
+  </g>
+</svg>
