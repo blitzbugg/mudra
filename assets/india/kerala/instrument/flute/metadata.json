@@ -1,0 +1,40 @@
+{
+  "name": "Flute",
+  "slug": "flute",
+  "region": [
+    "kerala",
+    "tamil-nadu",
+    "india"
+  ],
+  "category": "instrument",
+  "description": "The flute is a member of a family of musical instruments in the woodwind group. Like all woodwinds, flutes are aerophones, producing sound with a vibrating column of air. Flutes produce sound when the player's air flows across an opening. The flute is one of the oldest musical instruments, with examples dating back to prehistoric times. In India, the flute has a rich history and is often associated with classical music and traditional performances.",
+  "localNames": {
+    "malayalam": "ഓടക്കുഴൽ",
+    "sanskrit": "वेणु",
+    "hindi": "बांसुरी"
+  },
+  "tags": [
+    "music",
+    "instrument",
+    "wind",
+    "bamboo",   
+    "sopanam",
+    "tradition",
+    "kerala"
+  ],
+  "creator": {
+    "name": "Ananthapadmanabhan",
+    "github": "blitzbugg"
+  },
+  "source": {
+    "type": "original"
+  },
+  "license": "CC-BY-4.0",
+  "sources": [
+    {
+      "title": "Wikipedia - Flute",
+      "url": "https://en.wikipedia.org/wiki/Flute"
+    }
+  ],
+  "notes": "Icon features traditional bamboo texture and thread bindings"
+}
